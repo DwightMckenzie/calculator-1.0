@@ -5,13 +5,9 @@ const clearBtn = document.getElementById('clear-btn');
 // calculate first and secon value depending operator
 const calculate = {
   '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
-
   '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
-
   '+': (firstNumber, secondNumber) => firstNumber + secondNumber,
-
   '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
-
   '=': (firstNumber, secondNumber) => firstNumber = secondNumber
 }
 
@@ -20,15 +16,7 @@ let operatorValue = '';
 let awaitingNextValue = false;
 
 function sendNumberValue(number) {
-  // console.log(number);
-
-  // if current display value is 0, rpelace it, if not add number
-
-  // const displayValue = calculatorDisplay.textContent;
-  // calculatorDisplay.textContent = displayValue === '0' ? number : displayValue + number;
-  // calculatorDisplay.textContent
-
-  // repplace current display value if first value is entered
+  // replace current display value if first value is entered
   if (awaitingNextValue) {
     calculatorDisplay.textContent = number;
     awaitingNextValue = false;
@@ -45,8 +33,7 @@ function addDecimal() {
   // if no decimal add one
   if (!calculatorDisplay.textContent.includes('.')) {
     calculatorDisplay.textContent = `${calculatorDisplay.textContent}.`;
-  } 
-
+  }
 }
 
 function useOperator(operator) {
@@ -60,23 +47,16 @@ function useOperator(operator) {
   if (!firstValue) {
     firstValue = currentValue;
   } else {
-    // console.log(firstValue, operatorValue, currentValue);
-    const calculation = calculate[operatorValue](firstValue, currentValue);
-    // console.log('calculation', calculation); 
+    const calculation = calculate[operatorValue](firstValue, currentValue); 
     calculatorDisplay.textContent = calculation;
     firstValue = calculation;
   }
-
-
   // ready for next value atore operator
   awaitingNextValue = true;
   operatorValue = operator;
-  // console.log('firstValue ', firstValue);
-  // console.log('operator ', operator);
-
 }
 
-/// add event listeners for numbers, operators, and decimal buttons
+// add event listeners for numbers, operators, and decimal buttons
 inputBtns.forEach((inputBtn) => {
   if (inputBtn.classList.length === 0) {
     inputBtn.addEventListener('click', () => sendNumberValue(inputBtn.value));
@@ -97,5 +77,3 @@ function resetAll() {
 
 // event listeners
 clearBtn.addEventListener('click', resetAll);
-
-
